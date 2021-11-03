@@ -1,0 +1,63 @@
+import sqlite3
+#Create a database
+conn = sqlite3.connect('DatabaseAssignment.db')
+#Execute with database connection
+with conn:
+    #Create table in database
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS tbl_persons( \
+        ID INTEGER PRIMARY KEY AUTOINCREMENT, \
+        col_fname TEXT, \
+        col_lname TEXT, \
+        col_sport TEXT \
+        )")
+    conn.commit()
+
+# A list of parameters to pass to queries
+# Notice we are making a list of lists
+# `execute` takes a list of inputs for a single execution
+FileList = [
+    ["information.docx"],
+    ["Hello.txt"],
+    ["myImage.png"],
+    ["myMovie.mpg"],
+    ["World.txt"],
+    ["data.pdf"],
+    ["myPhoto.jpg"],
+]
+def openFile():
+    with open('Hello.txt','r') as f:
+        data = f.read()
+        print(data)
+        f.close()
+if __name__ == "__main__":
+    
+    openFile()
+def openFile():
+    with open('World.txt','r') as f:
+        data = f.read()
+        print(data)
+        f.close()
+if __name__ == "__main__":
+    
+    openFile()    
+
+with conn:
+    cur = conn.cursor()
+    cur.execute("INSERT INTO tbl_persons(col_fname, col_lname , col_sport) VALUES (?,?,?)", \
+                ('Lebron','James','Basketball'))
+    cur.execute("INSERT INTO tbl_persons(col_fname, col_lname , col_sport) VALUES (?,?,?)", \
+                ('Derek','Jeter','Baseball'))
+    cur.execute("INSERT INTO tbl_persons(col_fname, col_lname , col_sport) VALUES (?,?,?)", \
+                ('Wayne','Gretsky','Hockey'))
+    conn.commit()
+    
+with conn:
+    cur = conn.cursor()
+    cur.execute("SELECT col_fname,col_lname,col_sport FROM tbl_persons WHERE col_fname = 'Lebron'")
+    varPerson = cur.fetchall()
+    for item in varPerson:
+        msg = "First Name: {}\nLast Name: {}\nSport: {}".format(item[0],item[1],item[2])
+    print(msg)
+
+conn.close()
