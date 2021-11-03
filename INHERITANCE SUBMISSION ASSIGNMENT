@@ -1,0 +1,23 @@
+class Mammal:
+    def __init__(self, first_name, last_name="Lion",
+                 skin=" yellow fur", eyes = "brown"):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.skin = skin
+        self.eyes = eyes
+
+    def movement(self):
+        print("Leo can run really fast..")
+
+    def nap(self):
+        print("But also sleeps all the time!")
+        
+class Lion(Mammal):
+    pass
+
+leo = Mammal("Leo")
+print(leo.first_name + " the " + leo.last_name)
+print("Leo's skin is made up of {}".format(leo.skin))
+print("Leo has {} eyes.".format(leo.eyes))
+leo.movement()
+leo.nap()
