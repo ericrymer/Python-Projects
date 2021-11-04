@@ -12,8 +12,11 @@ class Mammal:
     def nap(self):
         print("But also sleeps all the time!")
         
-class Lion(Mammal):
+class Country(Mammal):
     pass
+    
+class Lifespan(Mammal):
+    pass   
 
 leo = Mammal("Leo")
 print(leo.first_name + " the " + leo.last_name)
