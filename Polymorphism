@@ -9,17 +9,17 @@ class Animal:
     print("Some can walk, and some can swim. Not many can do both!")
 #Child Class   
 class penguin(Animal):
-  location = 'Antarctica'
-  height = '3 Ft'
-  color = 'Black and White'
+  penguin_location = 'Antarctica'
+  penguin_height = '3 Ft'
+  penguin_color = 'Black and White'
   
   def swim(self):
     print("Penguin's can swim underwater for long distances and walk on land!")
 #Child Class        
 class squirrel(Animal):
- location = 'Everywhere'
- height = '7.1 inches'
- color = 'Brown'
+ squirrel_location = 'Everywhere'
+ squirrel_height = '7.1 inches'
+ squirrel_color = 'Brown'
  
 def swim(self):
     print("Squrriels are not very good swimmers, they wouldn't last long in a body of water.")
