@@ -15,11 +15,10 @@ class Organism:
 
 #child class instance
 class Human(Organism):
-    name = 'Brandon Belt'
-    species = 'Homosapien'
-    legs = 2
-    arms = 2
-    origin = 'Earth'
+    human_name = 'Brandon Belt'
+    human_species = 'Homosapien'
+    human_legs = 2
+    human_arms = 2
 
     def ingenuity(self):
         msg = "\nBryce plays professional baseball for the San Francisco Giants!"
@@ -28,12 +27,12 @@ class Human(Organism):
 
 #another class instance
 class  Lion(Organism):
-    name = "Leo"
-    species = 'Canine'
-    legs = 4
-    arms = 0
-    dna = "Sequence C"
-    origin = 'Earth'
+    lion_name = "Leo"
+    lion_species = 'Canine'
+    lion_legs = 4
+    lion_arms = 0
+    lion_dna = "Sequence C"
+    
 
     def bite(self):
         msg = "\nKing of the Jungle "
@@ -41,12 +40,12 @@ class  Lion(Organism):
 
 #another class instance
 class  Pelican(Organism):
-    name = "Paulie"
-    species = 'Bird'
-    legs = 2
-    arms = 2
-    dna = "Sequence D"
-    origin = 'Earth'
+    pelican_name = "Paulie"
+    pelican_species = 'Bird'
+    pelican_legs = 2
+    pelican_arms = 2
+    pelican_dna = "Sequence D"
+   
 
     def flight(self):
         msg = "\nPaulie loves to fly all around the beach looking for snacks!"
