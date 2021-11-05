@@ -32,7 +32,7 @@ class  Lion(Organism):
     species = 'Canine'
     legs = 4
     arms = 0
-    dna = "Sequence B"
+    dna = "Sequence C"
     origin = 'Earth'
 
     def bite(self):
@@ -43,9 +43,9 @@ class  Lion(Organism):
 class  Pelican(Organism):
     name = "Paulie"
     species = 'Bird'
-    legs = 0
-    arms = 0
-    dna = "Sequence B"
+    legs = 2
+    arms = 2
+    dna = "Sequence D"
     origin = 'Earth'
 
     def flight(self):
