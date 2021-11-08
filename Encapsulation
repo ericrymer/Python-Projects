@@ -1,0 +1,21 @@
+class Employee:
+    def __init__(self,name):
+        self.name='Sally'
+        self._position = 'Customer Service'
+        self.__salary = 50000
+        
+    def public_method(self):
+        print(self.name)
+        print(self.__salary)
+        print('50000')
+        self.__private_method()
+        
+    def __private_method(self):
+        print(self.__salary)
+
+
+emp = Employee('name')
+print(emp.name)
+print(emp._position)
+emp.public_method()
+#print(emp.__salary)
