@@ -1,16 +1,15 @@
-##Abstract Method
 from abc import ABC, abstractmethod
 class bike(ABC):
     def paySlip(self,amount):
         print("Your purchase amount: ", amount)
-        @abstractmethod
-        def payment(self,amount):
-            pass
- #Regular Method       
+    @abstractmethod
+    def payment(self,amount):
+        pass
+        
 class GiftCardPayment(bike):
     def payment(self,amount):
         print('Your purchase amount of {} exceeded your $200 limit '.format(amount))
 
-obj = DebitCardPayment()
+obj = GiftCardPayment()
 obj.paySlip("$500")
 obj.payment("$500")
