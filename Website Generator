@@ -2,6 +2,9 @@
 import tkinter
 from tkinter import *
 
+import webbrowser
+new=2;
+
 
 class ParentWindow(Frame):
     def __init__(self,master):
@@ -41,8 +44,9 @@ class ParentWindow(Frame):
     def submit(self):
         fn = self.varFName.get()
         ln = self.varLName.get()
-        f = open("website.html", "w")
-        f.write("Hey {} {}, Stay tuned for our amazing summer sale!".format(fn,ln))
+        webbrowser.open("demofile2.html",new=new);
+        f = open("demofile2.html", "w")
+        f.write("Hey {} {},Stay tuned for our amazing summer sale!".format(fn,ln))
         f.close()
 
     #open and read the file after the appending:
