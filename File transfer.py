@@ -1,26 +1,68 @@
-import shutil
-import os
-import time
+from tkinter import *
+from tkinter import filedialog as fd
+from tkinter.messagebox import showinfo
+import tkinter as tk
 
-SECONDS_IN_DAY = 24 * 60*60 
+class ParentWindow(Frame):
+    def __init__(self,master):
+        Frame.__init__ (self)
 
-#set where the source of the files are
-src = "C:\Users\Student\Desktop\FolderA"
+        self.master = master
+        self.master.resizable(width= True, height = True)
+        self.master.geometry('{}x{}'.format(600,300))
+        self.master.title('Check File!')
+        self.master.config(bg='lightgray')
 
-#set the destinaton path to folder b
-dst = "C:\Users\Student\Desktop\FolderB"
+        self.varFName = StringVar()
+        self.varLName = StringVar()
+    
+        
+        self.btnBrowse = Button(self.master, text="Browse", width = 15, height = 1, command=self.openFile)
+        self.btnBrowse.grid(row=0, column =0, padx=(20,0), pady=(30,0))
 
-now = time.time()
-before = now - SECONDS_IN_DAY
-
-#define function time
-def last_mod_time(fname):
-    return os.path.getmtime(fname)
+        self.btnBrowse1 = Button(self.master, text="Browse", width = 15, height = 1, command=self.openFile)
+        self.btnBrowse1.grid(row=1, column =0, padx=(20,0), pady=(30,0))
 
 
-for fname in os.listdir(src):
-    src_fname = os.path.join(src, fname)
-    if last_mod_time(src_fname) > before:
-        dst_fname = os.path.join(dst, fname)
-        shutil.move(src_fname, dst_fname)
+        self.txtFName = Entry(self.master,text=self.varFName, font=("Helvetica",16), fg = 'black', bg='white')
+        self.txtFName.grid(row=0, column =1, padx=(30,0), pady=(30,0))
 
+        self.txtLName = Entry(self.master,text=self.varLName, font=("Helvetica",16), fg = 'black', bg='white')
+        self.txtLName.grid(row=1, column =1, padx=(30,0), pady=(30,0))
+       
+        self.btnClose = Button(self.master, text="Close Program", width = 15, height = 1, command=self.cancel)
+        self.btnClose.grid(row=2, column =1, padx=(20,0), pady=(30,0), sticky=NE)
+
+        self.btnCheck = Button(self.master, text="Check for Files", width = 15, height = 1, command=self.check)
+        self.btnCheck.grid(row=2, column =0, padx=(20,0), pady=(30,0), sticky=W)
+
+    def submit(self):
+        fn = self.varFName.get()
+        ln = self.varLName.get()
+        self.lblDisplay.config(text='Hello {} {}!'.format(fn,ln))
+        
+    def cancel(self):
+       self.master.destroy()
+
+           
+    def check(self):
+       self.master.destroy()
+  
+       
+    # open a file box window 
+    # when we want to select a file
+    
+    def openFile(self):
+        self.filename= fd.askopenfilename()
+        showinfo(
+        title='Selected File',
+        message=self.filename)
+       
+
+
+
+
+if __name__ == "__main__":
+    root = Tk()
+    App = ParentWindow(root)
+    root.mainloop()
