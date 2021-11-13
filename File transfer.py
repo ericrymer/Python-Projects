@@ -1,68 +1,75 @@
 from tkinter import *
-from tkinter import filedialog as fd
+from tkinter import filedialog
 from tkinter.messagebox import showinfo
 import tkinter as tk
+import time
+import shutil
+import os
+from datetime import datetime, timedelta
 
-class ParentWindow(Frame):
-    def __init__(self,master):
-        Frame.__init__ (self)
 
-        self.master = master
-        self.master.resizable(width= True, height = True)
-        self.master.geometry('{}x{}'.format(600,300))
-        self.master.title('Check File!')
-        self.master.config(bg='lightgray')
+def Createwindow():
+	
+	
+	root.sourceText = Entry(root, width = 50,textvariable = src)
+	root.sourceText.grid(row = 1, column = 1,pady = 5, padx = 5,columnspan = 2)
+	
+	source_browseButton = Button(root, text ="Browse",command = SourceBrowse, width = 15)
+	source_browseButton.grid(row = 1, column = 0,pady = 5, padx = 5)
+	
+	
+	root.destinationText = Entry(root, width = 50,textvariable = dst)
+	root.destinationText.grid(row = 2, column = 1,pady = 5, padx = 5,columnspan = 2)
+	
+	dest_browseButton = Button(root, text ="Browse",command = DestinationBrowse, width = 15)
+	dest_browseButton.grid(row = 2, column = 0,pady = 5, padx = 5)
+	
+	checkButton = Button(root, text ="Check for Files",command = check, width = 15)
+	checkButton.grid(row = 3, column = 0,pady = 5, padx = 5)
 
-        self.varFName = StringVar()
-        self.varLName = StringVar()
+
+SECONDS_IN_DAY = 24 * 60 * 60	
+
+
+
+def SourceBrowse():
+    	src = filedialog.askdirectory(initialdir ="/")
+    	root.sourceText.insert('1', src)
+def DestinationBrowse():
+        dst  = filedialog.askdirectory(initialdir ="/")
+        root.destinationText.insert('1', dst )
+
+def last_mod_time(fname):
+    return datetime.fromtimestamp(os.path.getmtime(fname))
+
+def check():
+    before = datetime.now() - timedelta(seconds=SECONDS_IN_DAY)
+    src_path = src.get()
+    dst_path = dst.get()
     
-        
-        self.btnBrowse = Button(self.master, text="Browse", width = 15, height = 1, command=self.openFile)
-        self.btnBrowse.grid(row=0, column =0, padx=(20,0), pady=(30,0))
-
-        self.btnBrowse1 = Button(self.master, text="Browse", width = 15, height = 1, command=self.openFile)
-        self.btnBrowse1.grid(row=1, column =0, padx=(20,0), pady=(30,0))
-
-
-        self.txtFName = Entry(self.master,text=self.varFName, font=("Helvetica",16), fg = 'black', bg='white')
-        self.txtFName.grid(row=0, column =1, padx=(30,0), pady=(30,0))
-
-        self.txtLName = Entry(self.master,text=self.varLName, font=("Helvetica",16), fg = 'black', bg='white')
-        self.txtLName.grid(row=1, column =1, padx=(30,0), pady=(30,0))
-       
-        self.btnClose = Button(self.master, text="Close Program", width = 15, height = 1, command=self.cancel)
-        self.btnClose.grid(row=2, column =1, padx=(20,0), pady=(30,0), sticky=NE)
-
-        self.btnCheck = Button(self.master, text="Check for Files", width = 15, height = 1, command=self.check)
-        self.btnCheck.grid(row=2, column =0, padx=(20,0), pady=(30,0), sticky=W)
-
-    def submit(self):
-        fn = self.varFName.get()
-        ln = self.varLName.get()
-        self.lblDisplay.config(text='Hello {} {}!'.format(fn,ln))
-        
-    def cancel(self):
-       self.master.destroy()
-
-           
-    def check(self):
-       self.master.destroy()
-  
-       
-    # open a file box window 
-    # when we want to select a file
     
-    def openFile(self):
-        self.filename= fd.askopenfilename()
-        showinfo(
-        title='Selected File',
-        message=self.filename)
-       
+
+    for fname in os.listdir(src_path):
+        src_fname = os.path.join(src_path, fname)
+        if last_mod_time(src_fname) > before:
+            dst_fname = os.path.join(dst_path, fname)
+            shutil.move(src_fname, dst_fname)
+        
+
+    
+
+        
 
 
 
-
-if __name__ == "__main__":
-    root = Tk()
-    App = ParentWindow(root)
-    root.mainloop()
+root = tk.Tk()
+root.geometry("830x120")
+root.title("Copy-Move GUI")
+root.config(background = "lightgray")
+src = StringVar()
+dst = StringVar()
+def submit():
+    src_path = src.get()
+    dst_path = dst.get()
+Createwindow()
+root.mainloop()
